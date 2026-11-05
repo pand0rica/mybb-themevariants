@@ -1,0 +1,19 @@
+
+# Sensible / lokale Dateien – niemals committen
+.vscode/sftp.json
+*.sql
+*.sql.gz
+*.dump
+*.bak
+*.backup
+
+# Interne Entwicklungsdocs (gehören nicht ins öffentliche Repo)
+DELIVERY_SUMMARY.md
+TESTING.md
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+
+# Upload-/Runtime-Verzeichnisse (falls vom Plugin genutzt)
+uploads/

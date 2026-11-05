@@ -1,0 +1,84 @@
+[size=x-large][b]Theme Variants[/b][/size]
+[i]Version 1.0.0[/i] – Eigene Template-Varianten pro Theme, ohne das Template-Set zu verdoppeln und ohne PHP in Templates.
+
+[size=large][b]Worum geht's?[/b][/size]
+
+Viele Foren bieten mehrere Designs an, die sich ein Template-Set teilen – die Unterschiede stecken nur im Stylesheet. Sobald ein Design aber ein anderes Markup braucht, etwa eine zusätzliche Header-Tabelle oder einen eigenen Footer, bleibt bisher nur ein komplettes zweites Template-Set oder PHP im Template. Mit Theme Variants legst du im ACP fest: „Dieses Theme nutzt für dieses Template oder diesen Platzhalter jene Variante – auf diesen Seiten." Child-Themes erben das automatisch.
+
+[size=large][b]Highlights[/b][/size]
+
+[list]
+[*] Bestehende Templates pro Theme austauschen oder Platzhalter („Slots") pro Theme füllen
+[*] Vererbung über die Theme-Hierarchie – Child-Themes übernehmen, überschreiben oder schalten ab
+[*] Pro Zuordnung festlegbar, auf welchen Seiten sie gilt
+[*] Varianten sind normale MyBB-Templates und nutzen alle gewohnten Variablen
+[*] Kein zusätzlicher Datenbankzugriff pro Seitenaufruf dank Cache
+[/list]
+
+[size=large][b]Was das Plugin alles kann[/b][/size]
+
+[b]Für Administratoren[/b]
+[list]
+[*][b]Template ersetzen[/b] – Du gibst den Titel eines bestehenden Templates an (z. B. [i]footer[/i]) und eine Variante. Für dieses Theme zeigt das Forum dann überall die Variante statt des Originals. [i](ACP → Templates & Style → Theme Variants → Zuordnung hinzufügen)[/i]
+[*][b]Slot füllen[/b] – Du setzt einen Platzhalter wie [i]<!--themevariants:headertabelle-->[/i] in ein beliebiges Template. Jedes Theme kann diesen Platz mit einer eigenen Variante füllen; Themes ohne Zuordnung zeigen dort nichts. [i](ACP → Theme Variants)[/i]
+[*][b]Vererbung[/b] – Hat ein Theme keine eigene Zuordnung, gilt die des Eltern-Themes. Eine Zuordnung mit leerer Variante beendet die Vererbung, z. B. um eine geerbte Header-Tabelle in einem Child-Theme abzuschalten.
+[*][b]Seitenliste[/b] – Jede Zuordnung gilt auf allen Seiten oder nur auf den angegebenen Skripten (z. B. index.php, portal.php).
+[*][b]Übersicht als Theme-Baum[/b] – Pro Theme siehst du alle wirksamen Zuordnungen mit Herkunft („eigen" oder „geerbt von …") und Status. Ein Warnsymbol zeigt Varianten, deren Template noch fehlt. Geerbte Zuordnungen überschreibst du mit einem Klick. [i](ACP → Theme Variants → Übersicht)[/i]
+[*][b]Aktiv schalten und löschen[/b] – Zuordnungen lassen sich vorübergehend deaktivieren, ohne sie zu löschen.
+[*][b]Debug-Ausgabe[/b] – Auf Wunsch sehen Admins im Quelltext Kommentare, welche Variante wo gegriffen hat und von welchem Theme sie stammt.
+[/list]
+
+[b]Läuft automatisch[/b]
+[list]
+[*][b]Ersetzen beim Seitenaufbau[/b] – Template-Ersetzungen greifen früh genug, dass auch Templates anderer Plugins (z. B. Header-Tabellen) ersetzt werden können. Slots werden ersetzt, kurz bevor die Seite ausgegeben wird.
+[/list]
+
+[size=large][b]So sieht's aus[/b][/size]
+
+[i]Screenshot folgt[/i] – Übersicht im ACP mit Theme-Baum
+[i]Screenshot folgt[/i] – Formular „Zuordnung hinzufügen"
+
+[size=large][b]Einstellungen[/b][/size]
+
+[list]
+[*][b]Theme Variants aktivieren[/b] – Hauptschalter. Ausgeschaltet wird nichts ersetzt und Slot-Platzhalter bleiben leer. [i](Standard: Ja)[/i]
+[*][b]Debug-Ausgabe für Admins[/b] – Zeigt Admins HTML-Kommentare zur aufgelösten Zuordnung. [i](Standard: Nein)[/i]
+[/list]
+
+[size=large][b]Voraussetzungen[/b][/size]
+
+[list]
+[*] MyBB 1.8.x (getestet mit 1.8.39)
+[*] PHP 7.4 oder 8.x
+[*] Keine weiteren Plugins nötig
+[/list]
+
+[size=large][b]Installation[/b][/size]
+
+[list=1]
+[*] Dateien in das MyBB-Stammverzeichnis kopieren (Ordnerstruktur beibehalten)
+[*] ACP → Konfiguration → Plugins → Theme Variants → Installieren & aktivieren
+[*] ACP → Admin-Berechtigungen: Recht „Theme Variants" für die gewünschten Admin-Gruppen setzen
+[*] Varianten-Templates im Template-Editor anlegen (Vorschlag: [i]tv_<ziel>_<design>[/i]) und unter ACP → Templates & Style → Theme Variants zuordnen
+[/list]
+
+[size=large][b]Grenzen & Ausblick[/b][/size]
+
+Das Plugin legt Varianten-Templates nicht selbst an – du pflegst sie im Template-Editor. Platzhalter in deinen Templates bleiben beim Deinstallieren stehen; als HTML-Kommentare sind sie unsichtbar. Passt die Seitenliste einer Zuordnung nicht, greift bewusst keine Zuordnung eines Eltern-Themes, damit das Verhalten vorhersehbar bleibt.
+
+[size=large][b]Für die Entwicklung[/b][/size]
+
+[list]
+[*] [i]themevariants_get_effective($tid, $type, $target, $script)[/i] liefert die wirksame Zuordnung inklusive Herkunfts-Theme oder [i]null[/i].
+[/list]
+
+[size=large][b]Download & Quellcode[/b][/size]
+
+&raquo; [url=https://github.com/pand0rica/mybb-themevariants]GitHub: pand0rica/mybb-themevariants[/url] – Änderungen im [url=https://github.com/pand0rica/mybb-themevariants/blob/main/CHANGELOG.md]Changelog[/url], Lizenz GPL-3.0
+
+[size=large][b]Unterstützung[/b][/size]
+
+<i class="cp cp-tea"></i> Wenn dir das Plugin gefällt, kannst du mir gerne einen Tee spendieren: [url=https://ko-fi.com/pand0rica]ko-fi.com/pand0rica[/url]
+
+[size=small]Fragen, Bugs oder Feature-Wünsche gerne als GitHub Issue melden oder hier im Thread.
+Ich freue mich, wenn ihr mir den Link dalasst, wo das Plugin verwendet wird.[/size]
